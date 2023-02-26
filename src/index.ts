@@ -12,6 +12,8 @@ import { SessionUser } from "./types/session-user.interface";
 import { userRouter } from "./user/user.router";
 import authController from "./auth/auth.controller";
 import { expenseTypeRouter } from "./expense-type/expense-type.router";
+import { paymentMethodRouter } from "./payment-method/payment-method.router";
+import { expenseRouter } from "./expense/expense.router";
 
 dotenv.config();
 
@@ -49,6 +51,8 @@ AppDataSource.initialize().then( async () => {
     app.use('/api/user', userRouter);
     app.use('/api/accounts', accountRouter);
     app.use('/api/expense-types', expenseTypeRouter);
+    app.use('/api/payment-methods', paymentMethodRouter);
+    app.use('/api/expenses', expenseRouter);
     app.listen(PORT, () => {
       console.log(`Server istening on port ${PORT}`);
     });

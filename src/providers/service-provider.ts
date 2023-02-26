@@ -5,6 +5,9 @@ import { AppDataSource } from "../data-source";
 import { UserService } from "../user/user.service";
 import { ExpenseTypeService } from "../expense-type/expense-type.service";
 import { ExpenseType } from "../entity/ExpenseType";
+import { PaymentMethodService } from "../payment-method/payment-method.service";
+import { PaymentMethod } from "../entity/PaymentMethod";
+import { ExpenseService } from "../expense/expense.service";
 
 export async function getService<T>(name: string): Promise<T> {
     if (!AppDataSource.isInitialized) {
@@ -20,6 +23,12 @@ export async function getService<T>(name: string): Promise<T> {
             break;
         case 'ExpenseTypeService':
             return new ExpenseTypeService(AppDataSource.getRepository(ExpenseType)) as unknown as T;
+            break;
+        case 'PaymentMethodService':
+            return new PaymentMethodService(AppDataSource.getRepository(PaymentMethod)) as unknown as T;
+            break;
+        case 'ExpenseService':
+            return new ExpenseService(AppDataSource) as unknown as T;
             break;
 
     }

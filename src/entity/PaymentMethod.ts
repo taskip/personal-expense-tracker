@@ -14,9 +14,9 @@ export class PaymentMethod {
     @Column()
     description: string;
 
-    @OneToOne(() => Account)
+    @OneToOne(() => Account, {nullable: true})
     @JoinColumn()
-    account: Account;
+    account?: Account;
 
     @OneToMany(() => Expense, (expense) => expense.paymentMethod)
     expenses: Expense[];
