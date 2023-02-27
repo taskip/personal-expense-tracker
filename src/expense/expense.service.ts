@@ -25,7 +25,9 @@ export class ExpenseService {
     }
 
     async getAll(): Promise<Expense[]> {
-        return this.expenseRepository.find();
+        return this.expenseRepository.find({
+            relations: ['expenseType', 'paymentMethod']
+        });
     }
 
     async addExpense(expense: AddExpense): Promise<Expense> {
