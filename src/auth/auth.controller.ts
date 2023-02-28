@@ -16,24 +16,18 @@ authController.post('/login', async (req, res) => {
         const password = req.body?.password ?? undefined;
         if (!username || !password) {
             console.log('User or pw missing!');
-            //res.status(400).send({error: 'data missing'});
         }
         const user = await userService.verifyUser(username, password);
-        if (!user) {
-            //res.status(401).send({error: 'authentication failure'});
-        } else {
+        if (user) {
             console.log('User auth ok, setting to session..');
-            //req.session.username = 'test';
-            
-            req.session.user = // user.email as string;
+            req.session.user = 
             {
-                id: 'bogus',
+                id: user.id,
                 username: user.email,
                 authenticated: true
             }
-            
             authuser = user;
-           authOk = true;
+            authOk = true;
         }
         
     } catch (e) {
