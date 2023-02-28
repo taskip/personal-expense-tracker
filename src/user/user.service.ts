@@ -9,7 +9,6 @@ export class UserService {
 
  
     async addUser(email: string, passwd: string): Promise<User> {
-        console.log('Adding user ' + email);
         try {
             const pwhash = await bcrypt.hash(passwd, 10);
             const user = this.userRepository.save({
@@ -32,7 +31,6 @@ export class UserService {
                 console.log('User not found!');
                 return undefined;
             }
-            console.log('Found user, checking password..');
             if (await bcrypt.compare(password, user.passwd)) {
                 return user;
             }

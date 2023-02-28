@@ -11,7 +11,6 @@ export const accountRouter = express.Router();
 
 accountRouter.get('/', async (req: Request, res: Response) => {
     try {
-        console.log('Get all accounts');
         const accountService = await getService<AccountService>('AccountService');
         const accounts = await accountService.getAll();
         res.status(200).send(accounts);
