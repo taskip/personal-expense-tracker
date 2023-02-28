@@ -1,4 +1,6 @@
 # Test project with express and typeorm
+Not meant for actual use at this point, only for demonstration purposes.
+
 
 Steps to run this project:
 
@@ -9,4 +11,10 @@ Steps to run this project:
 (it should run TypeORM migrations automatically)
 
 #Todo
-way to create initial user.
+- way to create initial user.
+- way more unittest coverate
+- Proper logger
+- budget feature
+- balance tranfer features
+- reporting featuers
+- etc. etc. 
