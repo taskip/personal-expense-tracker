@@ -24,6 +24,7 @@ authController.post('/login', async (req, res) => {
         } else {
             console.log('User auth ok, setting to session..');
             //req.session.username = 'test';
+            
             req.session.user = // user.email as string;
             {
                 id: 'bogus',

@@ -35,9 +35,10 @@ describe('AccountRouter', ( )=> {
             };
             mockedProvider.mockImplementation(async () => Promise.resolve(accountServiceMock));
             accountServiceMock.getById.mockResolvedValueOnce(mockAccount);
-            const response = await request(app).get('/api/accounts/asdfasdf');
+            const response = await request(app).get('/api/accounts/bogus-id');
             expect(response.status).toEqual(200);
             expect(response.body).toEqual(mockAccount);
+            expect(accountServiceMock.getById).toHaveBeenCalledWith('bogus-id');
         });
     });
 
