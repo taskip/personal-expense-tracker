@@ -6,9 +6,6 @@ import { AddAccount } from "./addaccount.type";
 
 export const accountRouter = express.Router();
 
-
-
-
 accountRouter.get('/', async (req: Request, res: Response) => {
     try {
         const accountService = await getService<AccountService>('AccountService');

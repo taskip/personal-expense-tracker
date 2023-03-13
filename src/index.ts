@@ -14,6 +14,12 @@ import authController from "./auth/auth.controller";
 import { expenseTypeRouter } from "./expense-type/expense-type.router";
 import { paymentMethodRouter } from "./payment-method/payment-method.router";
 import { expenseRouter } from "./expense/expense.router";
+import { AccountController } from "./account/account.controller";
+import { AccountService } from "./account/account.service";
+import { getService } from "./providers/service-provider";
+import { Server } from "./server";
+
+
 
 dotenv.config();
 
@@ -24,7 +30,19 @@ declare module "express-session" {
   }
 }
 
+const server = new Server();
+server.init().then(() => {
+  server.run();
+});
+
+/*
 let RedisStore = connectRedis(session);
+
+let accountController: AccountController;
+getService<AccountService>('AccountService').then((service) => {
+  accountController = new AccountController(service);
+});
+
 
 //const AppDataSource = getDatasource();
 
@@ -49,7 +67,7 @@ AppDataSource.initialize().then( async () => {
     app.use(sessionCheck);
     app.use('/api/auth', authController);
     app.use('/api/user', userRouter);
-    app.use('/api/accounts', accountRouter);
+    app.use('/api/accounts', accountController.getRouter());
     app.use('/api/expense-types', expenseTypeRouter);
     app.use('/api/payment-methods', paymentMethodRouter);
     app.use('/api/expenses', expenseRouter);
@@ -57,3 +75,4 @@ AppDataSource.initialize().then( async () => {
       console.log(`Server istening on port ${PORT}`);
     });
 });
+*/

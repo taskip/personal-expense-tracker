@@ -1,4 +1,4 @@
-import { DeleteResult, Repository, UpdateResult } from "typeorm";
+import { DeleteResult, Repository } from "typeorm";
 import { ExpenseType } from "../entity/ExpenseType";
 import { AddExpenseType } from "./addexpensetype.type";
 
