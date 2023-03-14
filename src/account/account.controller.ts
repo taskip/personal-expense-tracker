@@ -18,15 +18,9 @@ export class AccountController {
         this.getAccounts = this.getAccounts.bind(this);
         this.getAccountById = this.getAccountById.bind(this);
         this.path = '/api/accounts';
-        //this.initService();
         this.initRoutes();
     }
 
-    static async setup(app: Express): Promise<Express> {
-        const service = await getService<AccountService>('AccountService');
-        const controller = new AccountController(service);
-        return app.use(controller.getPath(), controller.getRouter());
-    }
 
     private initRoutes(): void  {
         this.router.get('/', this.getAccounts);
@@ -67,7 +61,7 @@ export class AccountController {
     async saveAccount(req: Request, res: Response): Promise<void> {
         try {
             const body = req.body;
-            delete body.id;
+            body.id = undefined;
             const account = await this.accountService.save(body as AddAccount);
             res.status(200).send(account);
     

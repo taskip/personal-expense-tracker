@@ -9,28 +9,24 @@ import { PaymentMethodService } from "../payment-method/payment-method.service";
 import { PaymentMethod } from "../entity/PaymentMethod";
 import { ExpenseService } from "../expense/expense.service";
 
-export async function getService<T>(name: string): Promise<T> {
+export  function getService<T>(name: string): T {
+    /*
     if (!AppDataSource.isInitialized) {
         await AppDataSource.initialize();
     }
-    
+    */
     switch (name) {
         case 'AccountService':
             return new AccountService(AppDataSource.getRepository(Account)) as unknown as T;
-            break;
         case 'UserService':
             return new UserService(AppDataSource.getRepository(User)) as unknown as T;
-            break;
         case 'ExpenseTypeService':
             return new ExpenseTypeService(AppDataSource.getRepository(ExpenseType)) as unknown as T;
-            break;
         case 'PaymentMethodService':
             return new PaymentMethodService(AppDataSource.getRepository(PaymentMethod)) as unknown as T;
-            break;
         case 'ExpenseService':
             return new ExpenseService(AppDataSource) as unknown as T;
-            break;
 
     }
-    throw new Error('Service not defined: ' + name);
+    throw new Error(`Service not defined: ${name}`);
 }

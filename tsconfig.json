@@ -19,5 +19,5 @@
     "strictPropertyInitialization": false,             /* Check for class properties that are declared but not set in the constructor. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "exclude": ["src/migrations/*ts", "*/**/*.spec.*"]
+  "exclude": ["dist", "src/migrations/*ts", "*/**/*.spec.*"]
 }

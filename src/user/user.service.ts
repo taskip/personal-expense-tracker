@@ -32,10 +32,12 @@ export class UserService {
                 return undefined;
             }
             if (await bcrypt.compare(password, user.passwd)) {
+                console.log('auth success!');
                 return user;
             }
         } catch (e) {
-            console.log('Error in user validation ' + username);
+            console.log(`Error in user validation ${username}`);
+            console.log(e);
         }
         return undefined;
     }

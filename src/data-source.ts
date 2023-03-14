@@ -14,7 +14,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 //export const  getDatasource = () => {
- export const AppDataSource=  new DataSource({
+ export const AppDataSource = new DataSource({
     type: "postgres",
     host: process.env.POSTGRES_HOST ?? 'localhost',
     port: 5432,
@@ -23,7 +23,8 @@ dotenv.config();
     database: process.env.POSTGRES_DATABASE ?? 'postgres',
     synchronize: true,
     logging: true,
-    entities: [User, Account, PaymentMethod, Expense, ExpenseType, ExpenseCategory, ExpenseCategorisation],
+    //entities: [User, Account, PaymentMethod, Expense, ExpenseType, ExpenseCategory, ExpenseCategorisation],
+    entities: ['entity/*.ts'],
     //migrations: ['src/migrations/*.ts'],
     subscribers: [],
     });
