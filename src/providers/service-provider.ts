@@ -9,12 +9,11 @@ import { PaymentMethodService } from "../payment-method/payment-method.service";
 import { PaymentMethod } from "../entity/PaymentMethod";
 import { ExpenseService } from "../expense/expense.service";
 
-export  function getService<T>(name: string): T {
-    /*
+export async function getService<T>(name: string): Promise<T> {
     if (!AppDataSource.isInitialized) {
         await AppDataSource.initialize();
     }
-    */
+    
     switch (name) {
         case 'AccountService':
             return new AccountService(AppDataSource.getRepository(Account)) as unknown as T;

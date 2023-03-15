@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import { accountRouter } from "./account/account.router";
 import { AppDataSource } from "./data-source";
 import { client}  from "./services/cache.service"
 import session from 'express-session';
@@ -19,6 +18,8 @@ import { getService } from "./providers/service-provider";
 import { Server } from "./server";
 import { AuthControllerFactory } from "./auth/auth.controller.factory";
 import { AccountControllerFactory } from "./account/account.controller.factory";
+import { User } from "./entity/User";
+import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 
 
 
@@ -31,13 +32,13 @@ declare module "express-session" {
   }
 }
 
-/*
+
 const server = new Server();
 server.init().then(() => {
   server.run();
 });
 
-*/
+
 
 let RedisStore = connectRedis(session);
 
@@ -49,11 +50,14 @@ getService<AccountService>('AccountService').then((service) => {
 */
 
 //const AppDataSource = getDatasource();
-
+/*
 AppDataSource.initialize().then( async () => {
     const PORT: number = parseInt(process.env.PORT as string, 10);
     const app = express();
 
+    const personRepo = AppDataSource.getRepository(User);
+    const users = await personRepo.find();
+    console.log(users);
 
     app.use(express.json());
     app.use(session({
@@ -79,3 +83,4 @@ AppDataSource.initialize().then( async () => {
       console.log(`Server istening on port ${PORT}`);
     });
 });
+*/

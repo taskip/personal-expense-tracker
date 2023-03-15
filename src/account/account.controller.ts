@@ -1,32 +1,34 @@
 import express, { Request, Response, Router } from "express";
 import { getService } from "../providers/service-provider";
-import { Controller } from "../types/controller.base";
+import { ControllerBase } from "../types/controller.base";
 import { Express } from "express";
 
 import { AccountService } from "./account.service";
 import { AddAccount } from "./addaccount.type";
 
-export class AccountController {
+export class AccountController extends ControllerBase {
     private router: Router;
-    private path: string;
     //private accountService: AccountService;
 
     constructor(
       private readonly accountService: AccountService  
     ) {
+        super('AccountController', '/api/accounts');
         this.router = express.Router();
-        this.getAccounts = this.getAccounts.bind(this);
-        this.getAccountById = this.getAccountById.bind(this);
-        this.path = '/api/accounts';
         this.initRoutes();
     }
 
 
+    static async factory(): Promise<AccountController> {
+        const service = await getService<AccountService>('AccountService');
+        return new AccountController(service);
+    }
+    
     private initRoutes(): void  {
-        this.router.get('/', this.getAccounts);
-        this.router.get('/:id', this.getAccountById);
-        this.router.post('/', this.saveAccount);
-        this.router.delete('/:id', this.deleteAccount);
+        this.router.get('/', (req: Request, res: Response) => this.getAccounts(req, res));
+        this.router.get('/:id', (req: Request, res: Response) => this.getAccountById(req, res));
+        this.router.post('/', (req: Request, res: Response) => this.saveAccount(req, res));
+        this.router.delete('/:id', (req: Request, res: Response) =>  this.deleteAccount(req, res));
     }
 
     public getPath(): string {

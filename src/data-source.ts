@@ -23,8 +23,8 @@ dotenv.config();
     database: process.env.POSTGRES_DATABASE ?? 'postgres',
     synchronize: true,
     logging: true,
-    //entities: [User, Account, PaymentMethod, Expense, ExpenseType, ExpenseCategory, ExpenseCategorisation],
-    entities: ['entity/*.ts'],
+    entities: [User, Account, PaymentMethod, Expense, ExpenseType, ExpenseCategory, ExpenseCategorisation],
+    //entities: ['entity/*.ts'],
     //migrations: ['src/migrations/*.ts'],
     subscribers: [],
     });
