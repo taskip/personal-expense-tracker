@@ -23,12 +23,21 @@ export class AuthController {
     }
     
 
+    static async factory(): Promise<AuthController> {
+        const userService = await getService<UserService>('UserService');
+        return new AuthController(userService);
+    }
+
     private initRoutes(): void  {
         this.router.post('/login', this.login);
     }
 
     public getRouter(): Router {
         return this.router;
+    }
+
+    public getPath(): string {
+        return this.path;
     }
 
     async login(req: Request, res: Response): Promise<void> {

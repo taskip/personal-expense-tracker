@@ -21,6 +21,9 @@ export class AccountController extends ControllerBase {
 
     static async factory(): Promise<AccountController> {
         const service = await getService<AccountService>('AccountService');
+        if (!service) {
+            throw new Error('AccountService not available!');
+        }
         return new AccountController(service);
     }
     

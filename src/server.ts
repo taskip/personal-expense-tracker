@@ -7,11 +7,8 @@ import { SessionUser } from "./types/session-user.interface";
 import session from 'express-session';
 import connectRedis from "connect-redis"
 import { client}  from "./services/cache.service"
-import { AuthControllerFactory } from "./auth/auth.controller.factory";
-import { AccountControllerFactory } from "./account/account.controller.factory";
 import { ExpenseController } from "./expense/expense.controller";
 import { AccountController } from "./account/account.controller";
-import { Type } from "./types/type.interface";
 import { ControllerBase } from "./types/controller.base";
 import { serverConfig } from "./config/server.config";
 
@@ -66,20 +63,11 @@ export class Server {
     async initRoutes(): Promise<void> {
         console.log('Initializing routes/controllers  ..');
         //todo: separate controller-initialization ?
-        const authController = await AuthControllerFactory.getInstance();
-        //const accountController = await AccountControllerFactory.getInstance();
-        //const expenseController = await ExpenseController.factory();
-        
-        //for (let controlleClass of [ExpenseController, AccountController]) {
         for (let controlleClass of serverConfig.controllers) {
           const controller = await controlleClass.factory();
+          console.log(`Adding contoller [ ${controller.constructor.name} ] -> ${controller.getPath()}`);
           this.app.use(controller.getPath(), controller.getRouter());
-          
         }
-        this.app.use('/api/auth', authController.getRouter());
-        //this.app.use('/api/accounts', accountController.getRouter());
-        //this.app.use('/api/expenses', expenseController.getRouter());
-      
     }
 
     async init(): Promise<void> {

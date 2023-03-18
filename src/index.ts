@@ -2,24 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import { AppDataSource } from "./data-source";
-import { client}  from "./services/cache.service"
 import session from 'express-session';
 import connectRedis from "connect-redis"
-import { sessionCheck } from "./middleware/session-check";
 import { SessionUser } from "./types/session-user.interface";
-import { userRouter } from "./user/user.router";
-import { expenseTypeRouter } from "./expense-type/expense-type.router";
-import { paymentMethodRouter } from "./payment-method/payment-method.router";
-import { expenseRouter } from "./expense/expense.router";
-import { AccountController } from "./account/account.controller";
-import { AccountService } from "./account/account.service";
-import { getService } from "./providers/service-provider";
 import { Server } from "./server";
-import { AuthControllerFactory } from "./auth/auth.controller.factory";
-import { AccountControllerFactory } from "./account/account.controller.factory";
-import { User } from "./entity/User";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 
 
 

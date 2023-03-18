@@ -7,6 +7,9 @@ export class ExpenseTypeService {
         private readonly expenseTypeRepository: Repository<ExpenseType>
     ){};
 
+    static getServiceName(): string {
+        return 'ExpenseTypeService';
+    }
     async getById(id: string): Promise<ExpenseType> {
         return this.expenseTypeRepository.findOneOrFail({where: {id: id}});
     }
